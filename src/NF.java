@@ -78,16 +78,16 @@ public class NF {
 	public Complex mult(Complex wert1, double mu){
 		return new Complex(wert1.r*mu, wert1.i*mu );
 	}
-	public Complex hoch2(Complex wert){
+	public Complex pow2(Complex wert){
 		return mult(wert,wert);
 	}
-	public Complex hoch3(Complex wert){
-		return mult(hoch2(wert),wert);
+	public Complex pow3(Complex wert){
+		return mult(pow2(wert),wert);
 	}
-	public Complex hoch4(Complex wert){
-		return hoch2(hoch2(wert));
+	public Complex pow4(Complex wert){
+		return pow2(pow2(wert));
 	}
-	public Complex hoch(Complex wert, int h){
+	public Complex pow(Complex wert, int h){
 		Complex temp = wert;
 		for(; h > 1; h--)
 			temp = mult(temp,wert);
@@ -106,19 +106,19 @@ public class NF {
 		//return wert.minus(devide(hoch3(wert).add(new Complex(-1,0)), hoch2(wert)));
 		switch(function){
 		case 0://x^2 -1
-			return devide(hoch2(wert).add(1), mult(wert,2));
+			return devide(pow2(wert).add(1), mult(wert,2));
 		case 1://x^3 -1
-			return devide(mult(hoch3(wert),new Complex(2,0)).add(new Complex(1,0)), mult(hoch2(wert),new Complex(3,0)));
+			return devide(mult(pow3(wert),new Complex(2,0)).add(new Complex(1,0)), mult(pow2(wert),new Complex(3,0)));
 		case 2://x^4 -1
-			return devide(mult(hoch(wert,4),3).add(1), mult(hoch(wert,3),4));
+			return devide(mult(pow(wert,4),3).add(1), mult(pow(wert,3),4));
 		case 3://x^5 -1
-			return devide(mult(hoch(wert,5),4).add(1), mult(hoch(wert,4),5));
+			return devide(mult(pow(wert,5),4).add(1), mult(pow(wert,4),5));
 		case 5://z^3 - 2*z + 2 Falle
-			return devide(mult(hoch(wert,3),2).add(-2), mult(hoch(wert,2),3).add(-2));
+			return devide(mult(pow(wert,3),2).add(-2), mult(pow(wert,2),3).add(-2));
 		case 6://z^3 + (-0.7+1.64*i)*z - (0.3 + 1.64*i)
-			return devide(mult(hoch(wert,3),2).add(new Complex(0.3, 1.64)), mult(hoch(wert,2),3).add(new Complex(-0.7, 1.64)));
+			return devide(mult(pow(wert,3),2).add(new Complex(0.3, 1.64)), mult(pow(wert,2),3).add(new Complex(-0.7, 1.64)));
 		case 7://z^5 + (5+2i)*z^3 - 2-i 
-			return devide(mult(hoch(wert,5),4).add(mult(hoch(wert,3),new Complex(10,4))).add(new Complex(2, 1)), mult(hoch(wert,4),5).add(mult(hoch(wert,2),new Complex(15,6))));
+			return devide(mult(pow(wert,5),4).add(mult(pow(wert,3),new Complex(10,4))).add(new Complex(2, 1)), mult(pow(wert,4),5).add(mult(pow(wert,2),new Complex(15,6))));
 		}
 		return wert;
 	}
